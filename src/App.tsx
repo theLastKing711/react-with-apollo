@@ -1,25 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Outlet } from "react-router-dom";
+import Header from "./layout/Header";
+import { useAuth } from "./auth/hooks/useAuth";
+import Footer from "./layout/Footer";
+import { Box } from "@mui/material";
 
 function App() {
+  const { isLoggedIn, logIn, logOut } = useAuth();
+  logIn();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Box className="App" sx={{ backgroundColor: "#EDF1F5" }}>
+      <Header isLoggedIn={isLoggedIn} logIn={logIn} logOut={logOut} />
+      <Box
+        sx={{
+          minHeight: "calc(100vh - 64px)",
+        }}
+      >
+        <Outlet />
+      </Box>
+      <Footer />
+    </Box>
   );
 }
 
