@@ -3,10 +3,15 @@ import Header from "./layout/Header";
 import { useAuth } from "./auth/hooks/useAuth";
 import Footer from "./layout/Footer";
 import { Box } from "@mui/material";
+import { useLayoutEffect } from "react";
 
 function App() {
   const { isLoggedIn, logIn, logOut } = useAuth();
   logIn();
+
+  useLayoutEffect(() => {
+    console.log("created");
+  }, []);
 
   return (
     <Box className="App" sx={{ backgroundColor: "#EDF1F5" }}>

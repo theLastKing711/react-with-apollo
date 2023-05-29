@@ -68,7 +68,7 @@ query animeAllTimePopular2($type: MediaType = ANIME, $perPage: Int = 6, $isMain:
         format
       }
     }
-  }ss
+  }
 `
 
 
