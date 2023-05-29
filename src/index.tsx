@@ -99,35 +99,35 @@ const authLink = setContext((_, { headers }) => {
 const client = new ApolloClient({
   link: authLink.concat(httpLink),
   cache: new InMemoryCache({
-    // typePolicies: {
-    //   Query: {
-    //     fields: {
-    //       Page: {
-    //         keyArgs: (item, context) => {
-    //           if (context.variables?.type === "ANIME") return false;
-    //           return ["page"];
-    //         },
-    //       },
-    //     },
-    //   },
-    //   Page: {
-    //     fields: {
-    //       media: {
-    //         // keyArgs: [],
-    //         merge(existing = [], incoming) {
-    //           console.log("merging", incoming);
-    //           // const merged = existing ? existing.slice(0) : [];
-    //           // for (let i = 0; i < incoming.length; ++i) {
-    //           //   merged[xa.offset + i] = incoming[i];
-    //           // }
-    //           console.log("existing", existing);
-    //           console.log("incoming", incoming);
-    //           return [...existing, ...incoming];
-    //         },
-    //       },
-    //     },
-    //   },
-    // },
+    typePolicies: {
+      Query: {
+        fields: {
+          Page: {
+            keyArgs: (item, context) => {
+              if (context.variables?.type === "ANIME") return false;
+              return ["page"];
+            },
+          },
+        },
+      },
+      Page: {
+        fields: {
+          media: {
+            // keyArgs: [],
+            merge(existing = [], incoming) {
+              console.log("merging", incoming);
+              // const merged = existing ? existing.slice(0) : [];
+              // for (let i = 0; i < incoming.length; ++i) {
+              //   merged[xa.offset + i] = incoming[i];
+              // }
+              console.log("existing", existing);
+              console.log("incoming", incoming);
+              return [...existing, ...incoming];
+            },
+          },
+        },
+      },
+    },
   }),
 });
 
